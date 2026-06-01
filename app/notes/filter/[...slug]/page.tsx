@@ -1,4 +1,3 @@
-// app/notes/filter/[...slug]/page.tsx
 import {
   dehydrate,
   HydrationBoundary,
@@ -24,13 +23,24 @@ export default async function FilteredNotesPage({
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["notes", 1, "", tagValue],
-    queryFn: () => fetchNotes(1, "", tagValue),
+    queryKey: [
+      "notes",
+      1,
+      "",
+      tagValue,
+    ],
+    queryFn: () =>
+      fetchNotes(1, "", tagValue),
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient tagValue={tagValue} />
+    <HydrationBoundary
+      state={dehydrate(queryClient)}
+    >
+      <NotesClient
+        key={tagValue ?? "all"}
+        tag={tagValue}
+      />
     </HydrationBoundary>
   );
 }
