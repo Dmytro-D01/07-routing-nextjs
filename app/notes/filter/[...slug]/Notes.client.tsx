@@ -86,7 +86,9 @@ export default function NotesClient({
         </button>
       </div>
 
-      <NoteList notes={data.notes} />
+      {data.notes.length > 0 && (
+        <NoteList notes={data.notes} />
+      )}
 
       <Pagination
         currentPage={page}
