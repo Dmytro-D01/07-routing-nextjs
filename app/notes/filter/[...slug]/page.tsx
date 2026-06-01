@@ -1,21 +1,21 @@
+// app/notes/filter/[...slug]/page.tsx
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
 import { fetchNotes } from "@/lib/api";
-import FilteredNotesClient from "./FilteredNotes.client";
+import NotesClient from "./Notes.client";
 
 interface FilteredNotesPageProps {
-  params: Promise<{ slug: string[] }>; // ← було tag: string[]
+  params: Promise<{ slug: string[] }>;
 }
 
 export default async function FilteredNotesPage({
   params,
 }: FilteredNotesPageProps) {
-  const { slug } = await params; // ← було { tag }
+  const { slug } = await params;
 
-  // "all" означає без фільтра — не передаємо tag у бекенд
   const tagValue =
     slug?.[0] === "all"
       ? undefined
@@ -24,23 +24,13 @@ export default async function FilteredNotesPage({
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [
-      "notes",
-      1,
-      "",
-      tagValue,
-    ],
-    queryFn: () =>
-      fetchNotes(1, "", tagValue),
+    queryKey: ["notes", 1, "", tagValue],
+    queryFn: () => fetchNotes(1, "", tagValue),
   });
 
   return (
-    <HydrationBoundary
-      state={dehydrate(queryClient)}
-    >
-      <FilteredNotesClient
-        tagValue={tagValue}
-      />
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <NotesClient tagValue={tagValue} />
     </HydrationBoundary>
   );
 }

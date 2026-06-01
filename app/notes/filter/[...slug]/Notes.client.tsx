@@ -7,13 +7,13 @@ import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
 import styles from "./NotesPage.module.css";
 
-interface FilteredNotesClientProps {
-  tagValue: string | undefined; // ← додати це поле
+interface NotesClientProps {
+  tagValue: string | undefined;
 }
 
-export default function FilteredNotesClient({
+export default function NotesClient({
   tagValue,
-}: FilteredNotesClientProps) {
+}: NotesClientProps) {
   const [page, setPage] = useState(1);
 
   const { data } = useSuspenseQuery({
