@@ -7,19 +7,19 @@ import { fetchNotes } from "@/lib/api";
 import FilteredNotesClient from "./FilteredNotes.client";
 
 interface FilteredNotesPageProps {
-  params: Promise<{ tag: string[] }>;
+  params: Promise<{ slug: string[] }>; // ← було tag: string[]
 }
 
 export default async function FilteredNotesPage({
   params,
 }: FilteredNotesPageProps) {
-  const { tag } = await params;
+  const { slug } = await params; // ← було { tag }
 
-  // "all" means no tag filter — don't pass tag to the backend
+  // "all" означає без фільтра — не передаємо tag у бекенд
   const tagValue =
-    tag?.[0] === "all"
+    slug?.[0] === "all"
       ? undefined
-      : tag?.[0];
+      : slug?.[0];
 
   const queryClient = new QueryClient();
 
@@ -39,7 +39,7 @@ export default async function FilteredNotesPage({
       state={dehydrate(queryClient)}
     >
       <FilteredNotesClient
-        tag={tagValue}
+        tagValue={tagValue}
       />
     </HydrationBoundary>
   );
