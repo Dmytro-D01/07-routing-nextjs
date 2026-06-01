@@ -26,6 +26,7 @@ const axiosInstance = axios.create({
 export async function fetchNotes(
   page: number = 1,
   search: string = "",
+  tag?: string,
 ): Promise<NotesResponse> {
   const params: Record<
     string,
@@ -33,6 +34,9 @@ export async function fetchNotes(
   > = { page, perPage: 12 };
   if (search.trim()) {
     params.search = search.trim();
+  }
+  if (tag) {
+    params.tag = tag;
   }
   const { data } =
     await axiosInstance.get<NotesResponse>(
