@@ -11,13 +11,13 @@ export interface NotesResponse {
 }
 
 const BASE_URL =
-  "https://notehub-public.goit.study/api";
-
+  "https://next-v1-notes-api.goit.study";
 const token =
   process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
+  timeout: 5000,
   headers: {
     Authorization: `Bearer ${token}`,
   },

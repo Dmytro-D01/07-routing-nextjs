@@ -4,15 +4,13 @@ import {
   useSuspenseQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import {
-  useState,
-  useEffect,
-} from "react";
+import { useState } from "react";
 import { fetchNotes } from "@/lib/api";
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
 import NoteForm from "@/components/NoteForm/NoteForm";
 import Modal from "@/components/Modal/Modal";
+import SearchBox from "@/components/SearchBox/SearchBox";
 import styles from "./NotesPage.module.css";
 
 interface NotesClientProps {
@@ -25,36 +23,21 @@ export default function NotesClient({
   const [page, setPage] = useState(1);
   const [search, setSearch] =
     useState("");
-  const [
-    debouncedSearch,
-    setDebouncedSearch,
-  ] = useState("");
   const [isModalOpen, setIsModalOpen] =
     useState(false);
 
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-      setPage(1);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [search]);
-
   const { data } = useSuspenseQuery({
     queryKey: [
       "notes",
       page,
-      debouncedSearch,
+      search,
       tag,
     ],
     queryFn: () =>
-      fetchNotes(
-        page,
-        debouncedSearch,
-        tag,
-      ),
+      fetchNotes(page, search, tag),
+    retry: false,
   });
 
   const handleModalClose = () => {
@@ -64,17 +47,19 @@ export default function NotesClient({
     });
   };
 
+  const handleSearch = (
+    query: string,
+  ) => {
+    setSearch(query);
+    setPage(1);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.toolbar}>
-        <input
-          className={styles.searchInput}
-          type="text"
+        <SearchBox
           value={search}
-          onChange={(e) =>
-            setSearch(e.target.value)
-          }
-          placeholder="Search notes..."
+          onSearch={handleSearch}
         />
         <button
           className={styles.addButton}
@@ -86,15 +71,22 @@ export default function NotesClient({
         </button>
       </div>
 
-      {data.notes.length > 0 && (
-        <NoteList notes={data.notes} />
+      {data.notes.length > 0 ? (
+        <>
+          <NoteList
+            notes={data.notes}
+          />
+          <Pagination
+            currentPage={page}
+            totalPages={data.totalPages}
+            onPageChange={setPage}
+          />
+        </>
+      ) : (
+        <p className={styles.noNotes}>
+          No notes found.
+        </p>
       )}
-
-      <Pagination
-        currentPage={page}
-        totalPages={data.totalPages}
-        onPageChange={setPage}
-      />
 
       {isModalOpen && (
         <Modal

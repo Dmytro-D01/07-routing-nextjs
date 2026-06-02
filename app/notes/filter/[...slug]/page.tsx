@@ -20,7 +20,13 @@ export default async function FilteredNotesPage({
       ? undefined
       : slug?.[0];
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
 
   await queryClient.prefetchQuery({
     queryKey: [
