@@ -11,7 +11,7 @@ import {
   ErrorMessage,
 } from "formik";
 import * as Yup from "yup";
-import { createNote } from "@/lib/api";
+import { createNote } from "@/lib/api/notes";
 import { CreateNoteData } from "@/types/note";
 import css from "./NoteForm.module.css";
 

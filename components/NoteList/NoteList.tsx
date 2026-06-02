@@ -6,7 +6,7 @@ import {
   useMutation,
 } from "@tanstack/react-query";
 import { Note } from "@/types/note";
-import { deleteNote } from "@/lib/api";
+import { deleteNote } from "@/lib/api/notes";
 import css from "./NoteList.module.css";
 
 interface NoteListProps {
