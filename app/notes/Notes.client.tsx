@@ -12,7 +12,15 @@ import Pagination from "@/components/Pagination/Pagination";
 import Modal from "@/components/Modal/Modal";
 import css from "./notes.module.css";
 
-export default function NotesClient() {
+interface NotesClientProps {
+  tag?: string;
+  basePath?: string;
+}
+
+export default function NotesClient({
+  tag,
+  basePath = "/notes",
+}: NotesClientProps) {
   const router = useRouter();
   const [search, setSearch] =
     useState("");
@@ -30,11 +38,13 @@ export default function NotesClient() {
         "notes",
         page,
         debouncedSearch,
+        tag ?? "all",
       ],
       queryFn: () =>
         fetchNotes(
           page,
           debouncedSearch,
+          tag,
         ),
       placeholderData: (prev) => prev,
       refetchOnMount: false,
@@ -48,7 +58,7 @@ export default function NotesClient() {
         setDebouncedSearch(query);
         setPage(1);
         router.push(
-          `/notes?search=${encodeURIComponent(query)}&page=1`,
+          `${basePath}?search=${encodeURIComponent(query)}&page=1`,
         );
       },
       500,
@@ -66,7 +76,7 @@ export default function NotesClient() {
   ) {
     setPage(newPage);
     router.push(
-      `/notes?search=${encodeURIComponent(debouncedSearch)}&page=${newPage}`,
+      `${basePath}?search=${encodeURIComponent(debouncedSearch)}&page=${newPage}`,
     );
   }
 
