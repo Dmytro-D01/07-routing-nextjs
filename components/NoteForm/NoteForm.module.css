@@ -1,99 +1,78 @@
-.title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 24px;
-}
-
 .form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.label {
+.title {
+  margin: 0;
+  font-size: 20px;
+  color: #212529;
+}
+
+.label,
+.formGroup {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 500;
-  color: #a8a8b3;
+  color: #212529;
 }
 
 .input,
 .textarea,
 .select {
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #2d2d44;
-  background-color: #16213e;
-  color: #ffffff;
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.2s;
-  font-family: inherit;
-}
-
-.input:focus,
-.textarea:focus,
-.select:focus {
-  border-color: #e94560;
-}
-
-.textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.select option {
-  background-color: #16213e;
-}
-
-.error {
-  color: #e94560;
-  font-size: 0.8rem;
+  margin-top: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  resize: none;
 }
 
 .actions {
   display: flex;
-  gap: 12px;
   justify-content: flex-end;
-  margin-top: 8px;
-}
-
-.cancelButton {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 1px solid #2d2d44;
-  background: transparent;
-  color: #a8a8b3;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.cancelButton:hover {
-  border-color: #a8a8b3;
-  color: #ffffff;
+  gap: 8px;
 }
 
 .submitButton {
-  padding: 10px 24px;
-  border-radius: 8px;
-  border: none;
-  background-color: #e94560;
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #0d6efd;
   color: #ffffff;
-  font-size: 0.95rem;
-  font-weight: 600;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
 }
 
-.submitButton:hover:not(:disabled) {
-  background-color: #c73652;
+.submitButton:hover {
+  background-color: #0b5ed7;
 }
 
 .submitButton:disabled {
-  opacity: 0.6;
+  background-color: #6c757d;
   cursor: not-allowed;
+}
+
+.cancelButton {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  color: #212529;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #e2e6ea;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
 }

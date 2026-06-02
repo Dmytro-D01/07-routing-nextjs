@@ -1,26 +1,23 @@
 .menuList {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
 .menuItem {
-  margin: 0;
+  margin-bottom: 16px;
 }
 
 .menuLink {
-  display: block;
-  padding: 10px 14px;
-  border-radius: 8px;
-  color: #e0e0e8;
   text-decoration: none;
-  transition: background-color 0.2s, color 0.2s;
+  color: #ffffff;
+  font-size: 16px;
+  display: block;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
 }
 
 .menuLink:hover {
-  background-color: #16213e;
-  color: #ffffff;
+  background-color: #444444;
+  color: #dddddd;
 }

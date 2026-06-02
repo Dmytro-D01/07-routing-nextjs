@@ -1,35 +1,29 @@
 .footer {
-  background-color: #1a1a2e;
-  border-top: 1px solid #16213e;
-  padding: 24px 32px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  text-align: center;
+  font-size: 14px;
+  color: #555555;
+  border-top: 1px solid #dddddd;
   margin-top: auto;
 }
 
 .content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  color: #a8a8b3;
-  font-size: 0.875rem;
+  margin: 0;
 }
 
 .wrap {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
+  justify-content: center;
+  gap: 20px;
 }
 
-.wrap a {
-  color: #e94560;
+.footer a {
+  color: #226ec5;
+  font-weight: 600;
   text-decoration: none;
-  margin-left: 4px;
 }
 
-.wrap a:hover {
+.footer a:hover {
   text-decoration: underline;
 }
